@@ -1,16 +1,69 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxModule } from './modulo/ngx/ngx.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { ListadoComponent } from './componentes/listado/listado.component';
+import { DetalleComponent } from './componentes/detalle/detalle.component';
+import { ContactoComponent } from './componentes/contacto/contacto.component';
+import { EdicionComponent } from './componentes/edicion/edicion.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { DashboardComponent } from './componentes/dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import { DragComponent } from './componentes/drag/drag.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NavComponent } from './componentes/nav/nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent,
+    HomeComponent,
+    ListadoComponent,
+    DetalleComponent,
+    ContactoComponent,
+    EdicionComponent,
+    LoginComponent,
+    DashboardComponent,
+    DragComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    NgxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
+    DragDropModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
