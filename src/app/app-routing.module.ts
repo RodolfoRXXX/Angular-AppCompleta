@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'listado', component: ListadoComponent},
   {path: 'detalle/:id', component: DetalleComponent},
   {path: 'contacto', component: ContactoComponent},
-  {path: 'edicion', component: DashboardComponent},
+  {path: 'tablero', component: DashboardComponent},
   {path: 'login', component: LoginComponent}
 ];
 
