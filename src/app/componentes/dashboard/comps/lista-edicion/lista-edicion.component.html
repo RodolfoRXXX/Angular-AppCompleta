@@ -1,0 +1,31 @@
+<div class="text-center m-5" *ngIf="false">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <table class="table table-hover mt-2 mb-3" *ngIf="true">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">Foto</th>
+          <th scope="col">Título</th>
+          <th scope="col">Género</th>
+          <th scope="col">Año</th>
+          <th scope="col">Imdb</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Alquilar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center align-middle" >
+          <th><img src="" alt="" style="height: 80px;"></th>
+          <td>Título 1</td>
+          <td>género 1</td>
+          <td>2022</td>
+          <td><b>7.5</b></td>
+          <td>$100</td>
+          <td>3</td>
+          <td><button type="button" class="btn btn-primary" style="z-index: 10;">Editar</button></td>
+        </tr>
+      </tbody>
+  </table>

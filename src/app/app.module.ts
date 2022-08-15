@@ -13,7 +13,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { ListadoComponent } from './componentes/listado/listado.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
-import { EdicionComponent } from './componentes/edicion/edicion.component';
+import { EdicionComponent } from './componentes/dashboard/comps/edicion/edicion.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -29,6 +29,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { FooterComponent } from './componentes/footer/footer.component';
+import { ListaEdicionComponent } from './componentes/dashboard/comps/lista-edicion/lista-edicion.component';
+import { ListaEstrenosComponent } from './componentes/dashboard/comps/lista-estrenos/lista-estrenos.component';
+import { ListaMaspedidasComponent } from './componentes/dashboard/comps/lista-maspedidas/lista-maspedidas.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { MatListModule } from '@angular/material/list';
     ContactoComponent,
     EdicionComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    FooterComponent,
+    ListaEdicionComponent,
+    ListaEstrenosComponent,
+    ListaMaspedidasComponent
   ],
   imports: [
     BrowserModule,

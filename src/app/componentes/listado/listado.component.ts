@@ -10,18 +10,25 @@ import { AccesoService } from 'src/app/servicios/acceso.service';
 export class ListadoComponent implements OnInit {
 
   peliculas: Pelicula[];
+  loading: boolean;
 
   constructor( private acceso: AccesoService ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.getListado();
   }
 
   getListado(){
-    this.acceso.getListado().subscribe( (data: Pelicula[]) => {
+    this.acceso.getPeliculas().subscribe( (data: any) => {
       this.peliculas = data;
-      console.log(data);
+      this.loading = false;
     } )
+  }
+
+  rentaPelicula( post: Pelicula ){
+    post.stock--;
+    this.acceso.rentaPelicula(post).subscribe()
   }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pelicula } from 'src/app/entidades/pelicula';
+import { AccesoService } from 'src/app/servicios/acceso.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  peliculas: Pelicula[];
+
+  constructor( private acceso: AccesoService ) { }
 
   ngOnInit(): void {
+    this.getPeliculas();
+  }
+
+  getPeliculas(){
+    this.acceso.getPeliculas().subscribe( (data:any) => {
+      this.peliculas = data;
+    } );
   }
 
 }

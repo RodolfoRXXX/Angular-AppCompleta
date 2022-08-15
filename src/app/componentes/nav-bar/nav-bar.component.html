@@ -19,9 +19,7 @@
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                 role="menu" aria-labelledby="button-basic">
-              <li role="menuitem"><a class="dropdown-item" routerLink="/detalle/1" routerLinkActive="active">Película 1</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/detalle/2" routerLinkActive="active">Película 2</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/detalle/3" routerLinkActive="active">Película 3</a></li>
+              <li role="menuitem" *ngFor="let pelicula of peliculas"><a class="dropdown-item" routerLink="/detalle/{{ pelicula.id }}" routerLinkActive="active">{{ pelicula.titulo }}</a></li>
             </ul>
           </li>
           <li class="nav-item ms-1">

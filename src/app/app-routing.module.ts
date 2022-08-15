@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
-import { EdicionComponent } from './componentes/edicion/edicion.component';
+import { EdicionComponent } from './componentes/dashboard/comps/edicion/edicion.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ListadoComponent } from './componentes/listado/listado.component';
 import { LoginComponent } from './componentes/login/login.component';

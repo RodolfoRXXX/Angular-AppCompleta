@@ -4,6 +4,7 @@ export interface Pelicula{
     genero: string,
     year: number,
     sinopsis: string,
+    imdb: number,
     stock: number,
     precio: number,
     foto: string
