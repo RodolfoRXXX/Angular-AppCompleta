@@ -4,7 +4,7 @@
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card" 
-                [ngClass]="(card.title == 'Edición/creación')?'bg-info':''">
+                [ngClass]="(card.title == 'Edición/creación')?'bg-azulmedio':(card.title == 'Más pedidas')?'bg-verdeclaro':(card.title == 'Listado de películas')?'bg-azulclaro':(card.title == 'Próximos estrenos')?'bg-amarillomedio':''">
         <mat-card-header>
           <mat-card-title>
             {{card.title}}
