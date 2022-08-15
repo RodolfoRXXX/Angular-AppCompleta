@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pelicula } from 'src/app/entidades/pelicula';
+import { AccesoService } from 'src/app/servicios/acceso.service';
 
 @Component({
   selector: 'app-lista-edicion',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaEdicionComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean;
+  peliculas: Pelicula[];
+
+  constructor( private acceso: AccesoService ) { }
 
   ngOnInit(): void {
+    this.loading = true;
+    this.getPeliculas();
+  }
+
+  getPeliculas(){
+    this.acceso.getPeliculas().subscribe( (data:any) => {
+      this.peliculas = data;
+      this.loading = false;
+    } )
   }
 
 }

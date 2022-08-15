@@ -1,25 +1,26 @@
-<div class="text-center m-5" *ngIf="false">
+  <div class="text-center m-5" *ngIf="loading">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  <table class="table table-hover mt-2 mb-3" *ngIf="true">
+  <div style="height: 250px; overflow-y: auto; " *ngIf="!loading">
+    <table class="table table-hover mt-2 mb-3" *ngIf="true">
       <thead>
         <tr class="text-center">
           <th scope="col">Foto</th>
           <th scope="col">Título</th>
           <th scope="col">Género</th>
-          <th scope="col">Año</th>
           <th scope="col">Cant. alq.</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center align-middle" >
-          <th><img src="" alt="" style="height: 80px;"></th>
-          <td>Título 1</td>
-          <td>género 1</td>
-          <td>2022</td>
-          <td><b>7</b></td>
+        <tr *ngFor="let pedida of masPedidas"  class="text-center align-middle" >
+          <th><img src="{{ pedida.foto }}" alt="{{ pedida.titulo }}" style="height: 80px;"></th>
+          <td>{{ pedida.titulo }}</td>
+          <td>{{ pedida.genero }}</td>
+          <td><b>{{ pedida.cantidad }}</b></td>
         </tr>
       </tbody>
-  </table>
+    </table>
+  </div>
+  

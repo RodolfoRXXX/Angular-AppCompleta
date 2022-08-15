@@ -1,6 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, of, throwError } from 'rxjs';
+import { Estreno } from '../entidades/estrenos';
+import { Pedidas } from '../entidades/pedidas';
 import { Pelicula } from '../entidades/pelicula';
 
 @Injectable({
@@ -9,6 +11,8 @@ import { Pelicula } from '../entidades/pelicula';
 export class AccesoService {
 
   url: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/peliculas";
+  urlPedidas: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/alquileres";
+  urlEstrenos: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/estrenos";
 
   constructor(private http: HttpClient ) { }
 
@@ -42,6 +46,20 @@ export class AccesoService {
 
   getPelicula( id: string ){
     return this.http.get<Pelicula>( this.url + '/' + id )
+               .pipe(
+                catchError(this.handleError)
+               );
+  }
+
+  getPedidas(){
+    return this.http.get<Pedidas[]>( this.urlPedidas )
+               .pipe(
+                catchError(this.handleError)
+               );
+  }
+
+  getEstrenos(){
+    return this.http.get<Estreno[]>( this.urlEstrenos )
                .pipe(
                 catchError(this.handleError)
                );
