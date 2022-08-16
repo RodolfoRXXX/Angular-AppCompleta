@@ -21,9 +21,7 @@ export class ListaEstrenosComponent implements OnInit {
 
   getEstrenos(){
     this.acceso.getEstrenos().subscribe( (data:Estreno[]) => {
-      
       this.estrenos = data;
-      console.log(this.estrenos);
       this.loading = false;
     } ); 
   }

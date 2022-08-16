@@ -1,9 +1,9 @@
-  <div class="d-flex justify-content-center align-items-center m-5" style="height: 600px;" *ngIf="loading">
+  <div class="d-flex justify-content-center align-items-center m-5" style="height: 690px;" *ngIf="loading">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  <div style="height: 600px; overflow-y: auto;">
+  <div style="height: 690px; overflow-y: auto;">
     <table class="table table-hover mt-2 mb-3 overflow-auto" *ngIf="!loading">
       <thead>
         <tr class="text-center">
@@ -22,7 +22,22 @@
           <td>{{ pelicula.genero }}</td>
           <td>${{ pelicula.precio }}</td>
           <td>{{ pelicula.stock }}</td>
-          <td><button type="button" class="btn btn-primary" style="z-index: 10;">Editar</button></td>
+          <td>
+            <button type="button" class="btn btn-primary p-1 d-flex justify-content-center align-items-center" title="Editar">
+              <span class="material-icons" *ngIf="true">
+              edit
+              </span>
+              <span class="material-icons" *ngIf="false">
+                highlight_off
+              </span>
+            </button>
+            
+            <button type="button" class="btn btn-danger p-1 mt-1 d-flex justify-content-center align-items-center" title="Eliminar">
+              <span class="material-icons">
+              delete
+              </span>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

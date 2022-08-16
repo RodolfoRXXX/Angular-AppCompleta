@@ -1,1 +1,85 @@
-<p>edicion works!</p>
+<div class="d-flex justify-content-center align-items-center" style="height: 250px;" *ngIf="activar">
+    <button class="btn btn-outline-dark" (click)="activarFormulario()">Crear un nuevo registro</button>
+</div>
+<div class="d-flex justify-content-center align-items-center m-5" style="height: 250px;" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div *ngIf="!loading && !activar">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div class="row mb-2">
+            <div class="col d-flex flex-column justify-content-between">
+                <img src="../../../../../assets/img/noimage.png" alt="" style="height: 160px; object-fit: contain;">
+                <div>
+                    <label for="inputUrl" class="form-label mb-0">URL de la imagen</label>
+                    <input type="text" class="form-control is-invalid" id="inputUrl" formControlName="foto">
+                    <div class="invalid-feedback d-flex justify-content-start">
+                        Problem
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex flex-column justify-content-between">
+                <div class="mb-1">
+                    <label for="inputTitulo" class="form-label mb-0">Título</label>
+                    <input type="text" class="form-control is-invalid" id="inputTitulo" formControlName="titulo">
+                    <div class="invalid-feedback d-flex justify-content-start">
+                        Problem
+                    </div>
+                </div>
+                <div class="mb-1">
+                    <label for="inputGenero" class="form-label mb-0">Género</label>
+                    <input type="text" class="form-control is-invalid" id="inputGenero" formControlName="genero">
+                    <div class="invalid-feedback d-flex justify-content-start">
+                        Problem
+                    </div>
+                </div>
+                <div class="col row">
+                    <div class="col">
+                        <label for="inputYear" class="form-label mb-0">Año</label>
+                        <input type="number" class="form-control is-invalid" id="inputYear" formControlName="year">
+                        <div class="invalid-feedback d-flex justify-content-start">
+                            Problem
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="inputImdb" class="form-label mb-0">Imdb</label>
+                        <input type="number" class="form-control is-invalid" id="inputImdb" formControlName="imdb">
+                        <div class="invalid-feedback d-flex justify-content-start">
+                            Problem
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex flex-column justify-content-between">
+                <div>
+                    <label for="inputSinopsis" class="form-label mb-0">Sinopsis</label>
+                    <textarea class="form-control is-invalid" id="inputSinopsis" rows="4" formControlName="sinopsis"></textarea>
+                    <div class="invalid-feedback d-flex justify-content-start">
+                        Problem
+                    </div>
+                </div>
+                <div class="col row">
+                    <div class="col d-flex flex-column justify-content-end">
+                        <label for="inputStock" class="form-label mb-0">Stock</label>
+                        <input type="number" class="form-control is-valid" id="inputStock" formControlName="stock">
+                        <div class="invalid-feedback d-flex justify-content-start">
+                            Problem
+                        </div>
+                    </div>
+                    <div class="col d-flex flex-column justify-content-end">
+                        <label for="inputPrecio" class="form-label mb-0">Precio</label>
+                        <input type="number" class="form-control is-invalid" id="inputPrecio" formControlName="precio">
+                        <div class="invalid-feedback d-flex justify-content-start">
+                            Problem
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-danger">Cancelar</button>
+            <button class="btn btn-success ms-2" type="submit" [disabled]="!formulario.invalid">Aceptar</button>
+        </div>
+    </form>
+</div>
