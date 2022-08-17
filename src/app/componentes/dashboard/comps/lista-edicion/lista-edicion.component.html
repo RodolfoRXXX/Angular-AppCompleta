@@ -23,16 +23,16 @@
           <td>${{ pelicula.precio }}</td>
           <td>{{ pelicula.stock }}</td>
           <td>
-            <button type="button" class="btn btn-primary p-1 d-flex justify-content-center align-items-center" title="Editar">
-              <span class="material-icons" *ngIf="true">
+            <button type="button" class="btn btn-primary p-1 d-flex justify-content-center align-items-center" (click)="editar(pelicula.id)" title="Editar">
+              <span class="material-icons" *ngIf="pelicula.id != idEditSeleccionado">
               edit
               </span>
-              <span class="material-icons" *ngIf="false">
+              <span class="material-icons" *ngIf="pelicula.id == idEditSeleccionado">
                 highlight_off
               </span>
             </button>
             
-            <button type="button" class="btn btn-danger p-1 mt-1 d-flex justify-content-center align-items-center" title="Eliminar">
+            <button type="button" class="btn btn-danger p-1 mt-1 d-flex justify-content-center align-items-center" (click)="eliminar(pelicula.id)" title="Eliminar">
               <span class="material-icons">
               delete
               </span>

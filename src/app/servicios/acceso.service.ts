@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
 import { Estreno } from '../entidades/estrenos';
 import { Pedidas } from '../entidades/pedidas';
 import { Pelicula } from '../entidades/pelicula';
@@ -35,6 +35,15 @@ export class AccesoService {
     return throwError(() => new Error('Algo malo sucedió. por favor intenta más tarde.'));
   }
 
+  //Comunicación entre componentes hermanos
+    //Lista de edición genera evento y componente edición detecta cambio y id de la película a editar
+    private id = new BehaviorSubject<string>('');
+    public customId = this.id.asObservable();
+
+    public setId( idEdit: string ):void{
+      this.id.next(idEdit);
+    }
+
   //Peticiones al servidor
   //GET
   getPeliculas(){
@@ -66,7 +75,12 @@ export class AccesoService {
   }
 
   //POST
-
+  creaPelicula( post: Pelicula ){
+    return this.http.post<Pelicula>(this.url, post, this.httpOptions)
+               .pipe(
+                catchError(this.handleError)
+               );
+  }
 
 
   //PUT
@@ -77,8 +91,19 @@ export class AccesoService {
                );
   }
 
+  editaPelicula( post: Pelicula ){
+    return this.http.put<Pelicula>( this.url + '/' + post.id, post, this.httpOptions )
+               .pipe(
+                catchError(this.handleError)
+               );
+  }
 
   //DELETE
-
+  eliminarPelicula( id: string ){
+    return this.http.delete( this.url + '/' + id, this.httpOptions )
+               .pipe(
+                catchError(this.handleError)
+               );
+  }
 
 }

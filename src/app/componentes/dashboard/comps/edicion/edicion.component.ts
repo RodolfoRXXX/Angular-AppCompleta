@@ -18,68 +18,92 @@ export class EdicionComponent implements OnInit {
   constructor( private acceso: AccesoService ) { }
 
   ngOnInit(): void {
-    this.activar = true;
+    this.acceso.customId.subscribe( idData => {
+      if(idData != ''){
+        this.acceso.getPelicula(idData).subscribe( data => {
+          this.activarFormulario(data);
+        } )
+      } else{
+        this.activar = true;
+      }
+    })
   }
 
-  creaFormulario(){
+  creaFormulario( pelicula?:Pelicula ){
     this.formulario = new FormGroup({
-      foto: new FormControl('',
+      foto: new FormControl((pelicula?.foto)?pelicula.foto:'',
       [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(200)
       ]),
-      titulo: new FormControl('',
+      titulo: new FormControl((pelicula?.titulo)?pelicula.titulo:'',
       [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50)
       ]),
-      genero: new FormControl('',
+      genero: new FormControl((pelicula?.genero)?pelicula.genero:'',
       [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50)
       ]),
-      year: new FormControl('',
+      year: new FormControl((pelicula?.year)?pelicula.year:'',
       [
         Validators.required,
         Validators.min(1900),
-        Validators.max(2050)
+        Validators.max(2100)
       ]),
-      imdb: new FormControl('',
+      imdb: new FormControl((pelicula?.imdb)?pelicula.imdb:'',
       [
         Validators.required,
         Validators.max(10.1)
       ]),
-      sinopsis: new FormControl('',
+      sinopsis: new FormControl((pelicula?.sinopsis)?pelicula.sinopsis:'',
       [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(500)
       ]),
-      stock: new FormControl('',
+      stock: new FormControl((pelicula?.stock)?pelicula.stock:'',
       [
         Validators.required,
-        Validators.max(10000)
+        Validators.max(100000)
       ]),
-      precio: new FormControl('',
+      precio: new FormControl((pelicula?.precio)?pelicula.precio:'',
       [
         Validators.required,
         Validators.max(1000000)
-      ])
+      ]),
+      id: new FormControl((pelicula?.id)?pelicula.id:'')
     });
     this.loading = false;
   }
 
-  activarFormulario(){
+  activarFormulario( pelicula?:Pelicula ){
     this.activar = false;
     this.loading = true;
-    this.creaFormulario();
+    this.creaFormulario( pelicula );
   }
 
   onSubmit(){
-    console.log(this.formulario.value);
+    if(this.formulario.value.id > 0){
+      //modifica un registro
+      this.acceso.editaPelicula(this.formulario.value).subscribe( () => {
+        this.activar = true;
+      } )
+    } else{
+      //crea un registro
+      this.acceso.creaPelicula(this.formulario.value).subscribe( () => {
+        this.activar = true;
+      } )
+    }
+  }
+
+  cerrarFormulario(){
+    this.activar = true;
+    this.acceso.setId('');
   }
 
 }

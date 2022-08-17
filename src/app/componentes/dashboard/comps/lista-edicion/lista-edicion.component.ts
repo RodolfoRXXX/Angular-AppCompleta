@@ -12,10 +12,12 @@ export class ListaEdicionComponent implements OnInit {
 
   loading: boolean;
   peliculas: Pelicula[];
+  idEditSeleccionado: string;
 
   constructor( private acceso: AccesoService ) { }
 
   ngOnInit(): void {
+    this.acceso.customId.subscribe( id => this.idEditSeleccionado = id )
     this.loading = true;
     this.getPeliculas();
   }
@@ -25,6 +27,19 @@ export class ListaEdicionComponent implements OnInit {
       this.peliculas = data;
       this.loading = false;
     } )
+  }
+
+  editar(id: string){
+    if(this.idEditSeleccionado == id){
+      this.idEditSeleccionado = '';
+    } else{
+      this.idEditSeleccionado = id;
+    }
+    this.acceso.setId(this.idEditSeleccionado);
+  }
+
+  eliminar(id: string){
+    this.acceso.eliminarPelicula(id).subscribe();
   }
 
 }
