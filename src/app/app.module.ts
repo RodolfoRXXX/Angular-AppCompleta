@@ -27,13 +27,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ListaEdicionComponent } from './componentes/dashboard/comps/lista-edicion/lista-edicion.component';
 import { ListaEstrenosComponent } from './componentes/dashboard/comps/lista-estrenos/lista-estrenos.component';
 import { ListaMaspedidasComponent } from './componentes/dashboard/comps/lista-maspedidas/lista-maspedidas.component';
+import { NotificacionComponent } from './componentes/notificacion/notificacion.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { ListaMaspedidasComponent } from './componentes/dashboard/comps/lista-ma
     FooterComponent,
     ListaEdicionComponent,
     ListaEstrenosComponent,
-    ListaMaspedidasComponent
+    ListaMaspedidasComponent,
+    NotificacionComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,6 @@ import { ListaMaspedidasComponent } from './componentes/dashboard/comps/lista-ma
     LayoutModule,
     DragDropModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatListModule,
     HttpClientModule,
     ReactiveFormsModule

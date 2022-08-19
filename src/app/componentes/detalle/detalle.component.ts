@@ -30,7 +30,7 @@ export class DetalleComponent implements OnInit {
   getPelicula( id: string ){
     this.acceso.getPelicula(id).subscribe( (data: any) => {
       this.loading = false;
-      this.pelicula = data;
+      this.pelicula = {...data};
     } )
   }
 

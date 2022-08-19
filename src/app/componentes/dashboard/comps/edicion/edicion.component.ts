@@ -12,7 +12,6 @@ export class EdicionComponent implements OnInit {
 
   activar: boolean;
   loading: boolean;
-  pelicula: Pelicula;
   formulario: FormGroup;
 
   constructor( private acceso: AccesoService ) { }
@@ -20,7 +19,7 @@ export class EdicionComponent implements OnInit {
   ngOnInit(): void {
     this.acceso.customId.subscribe( idData => {
       if(idData != ''){
-        this.acceso.getPelicula(idData).subscribe( data => {
+        this.acceso.getPelicula(idData).subscribe( (data:any) => {
           this.activarFormulario(data);
         } )
       } else{
@@ -90,14 +89,38 @@ export class EdicionComponent implements OnInit {
   onSubmit(){
     if(this.formulario.value.id > 0){
       //modifica un registro
-      this.acceso.editaPelicula(this.formulario.value).subscribe( () => {
-        this.activar = true;
-      } )
+      this.acceso.editaPelicula(this.formulario.value).subscribe({
+        next: () => {
+          this.acceso.setAviso(
+            {estado: true, texto: "El registro se ha modificado con éxito!", activo: true}
+          )
+        },
+        error: () => {
+          this.acceso.setAviso(
+            {estado: false, texto: "Ocurrió un problema al modificar el registro.", activo: true}
+          )
+        },
+        complete: () => {
+          this.activar = true;
+        }
+      })
     } else{
       //crea un registro
-      this.acceso.creaPelicula(this.formulario.value).subscribe( () => {
-        this.activar = true;
-      } )
+      this.acceso.creaPelicula(this.formulario.value).subscribe({
+        next: () => {
+          this.acceso.setAviso(
+            {estado: true, texto: "El nuevo registro se creó con éxito!", activo: true}
+          )
+        },
+        error: () => {
+          this.acceso.setAviso(
+            {estado: false, texto: "Ocurrió un problema al crear el registro.", activo: true}
+          )
+        },
+        complete: () => {
+          this.activar = true;
+        }
+      })
     }
   }
 
