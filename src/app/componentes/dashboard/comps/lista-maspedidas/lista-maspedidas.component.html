@@ -9,16 +9,16 @@
         <tr class="text-center">
           <th scope="col">Foto</th>
           <th scope="col">Título</th>
-          <th scope="col">Género</th>
           <th scope="col">Cant. alq.</th>
+          <th scope="col">Ganancia($)</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let pedida of masPedidas"  class="text-center align-middle" >
           <th><img src="{{ pedida.foto }}" alt="{{ pedida.titulo }}" style="height: 80px;"></th>
           <td>{{ pedida.titulo }}</td>
-          <td>{{ pedida.genero }}</td>
           <td><b>{{ pedida.cantidad }}</b></td>
+          <td>${{ pedida.cantidad * pedida.precio }}</td>
         </tr>
       </tbody>
     </table>

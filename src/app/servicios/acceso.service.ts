@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
 import { Estreno } from '../entidades/estrenos';
 import { Aviso } from '../entidades/aviso';
-import { Pedidas } from '../entidades/pedidas';
 import { Pelicula } from '../entidades/pelicula';
 
 @Injectable({
@@ -13,7 +12,6 @@ export class AccesoService {
 
   url: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/peliculas";
   //url: string = "http://localhost:3000/api/peliculas"
-  urlPedidas: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/alquileres";
   urlEstrenos: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/estrenos";
 
   constructor(private http: HttpClient ) { }
@@ -71,7 +69,7 @@ export class AccesoService {
   }
 
   getPedidas(){
-    return this.http.get<Pedidas[]>( this.urlPedidas )
+    return this.http.get<Pelicula[]>( this.url )
                .pipe(
                 catchError(this.handleError)
                );
@@ -105,6 +103,13 @@ export class AccesoService {
     return this.http.put<Pelicula>( this.url + '/' + post.id, post, this.httpOptions )
                .pipe(
                 catchError(this.handleError)
+               );
+  }
+
+  sumaPelicula( post: Pelicula ){
+    return this.http.put<Pelicula>( this.url + '/' + post.id, post, this.httpOptions )
+               .pipe(
+                  catchError(this.handleError)
                );
   }
 

@@ -75,7 +75,8 @@ export class EdicionComponent implements OnInit {
         Validators.required,
         Validators.max(1000000)
       ]),
-      id: new FormControl((pelicula?.id)?pelicula.id:'')
+      id: new FormControl((pelicula?.id)?pelicula.id:''),
+      cantidad: new FormControl((pelicula?.cantidad)?pelicula.cantidad:'')
     });
     this.loading = false;
   }
@@ -101,7 +102,7 @@ export class EdicionComponent implements OnInit {
           )
         },
         complete: () => {
-          this.activar = true;
+          this.cerrarFormulario();
         }
       })
     } else{
@@ -118,7 +119,7 @@ export class EdicionComponent implements OnInit {
           )
         },
         complete: () => {
-          this.activar = true;
+          this.cerrarFormulario();
         }
       })
     }

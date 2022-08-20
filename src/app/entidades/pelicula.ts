@@ -7,5 +7,6 @@ export interface Pelicula{
     imdb: number,
     stock: number,
     precio: number,
-    foto: string
+    foto: string,
+    cantidad: number
 }

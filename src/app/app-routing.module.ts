@@ -6,7 +6,7 @@ import { DetalleComponent } from './componentes/detalle/detalle.component';
 import { EdicionComponent } from './componentes/dashboard/comps/edicion/edicion.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ListadoComponent } from './componentes/listado/listado.component';
-import { LoginComponent } from './componentes/login/login.component';
+import { AccessComponent } from './componentes/access/access.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'detalle/:id', component: DetalleComponent},
   {path: 'contacto', component: ContactoComponent},
   {path: 'tablero', component: DashboardComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'access', component: AccessComponent}
 ];
 
 @NgModule({

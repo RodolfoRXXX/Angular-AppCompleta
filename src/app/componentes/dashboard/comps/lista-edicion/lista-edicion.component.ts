@@ -17,9 +17,11 @@ export class ListaEdicionComponent implements OnInit {
   constructor( private acceso: AccesoService ) { }
 
   ngOnInit(): void {
-    this.acceso.customId.subscribe( id => this.idEditSeleccionado = id )
-    this.loading = true;
-    this.getPeliculas();
+    this.acceso.customId.subscribe( id => {
+      this.idEditSeleccionado = id;
+      this.loading = true;
+      this.getPeliculas(); 
+    })
   }
 
   getPeliculas(){

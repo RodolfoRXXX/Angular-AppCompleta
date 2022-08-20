@@ -38,8 +38,16 @@ export class ListadoComponent implements OnInit {
         this.acceso.setAviso(
           {estado: false, texto: "Ocurrió un problema al rentar la película.", activo: true}
         )
+      },
+      complete: () => {
+        this.sumaPelicula(post);
       }
     })
+  }
+
+  sumaPelicula( post: Pelicula ){
+    post.cantidad++;
+    this.acceso.sumaPelicula(post).subscribe();
   }
 
 }

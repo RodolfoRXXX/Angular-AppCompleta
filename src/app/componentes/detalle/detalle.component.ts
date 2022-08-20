@@ -36,7 +36,26 @@ export class DetalleComponent implements OnInit {
 
   rentaPelicula( post: Pelicula ){
     post.stock--;
-    this.acceso.rentaPelicula(post).subscribe()
+    this.acceso.rentaPelicula(post).subscribe({
+      next: () => {
+        this.acceso.setAviso(
+          {estado: true, texto: "La película se ha rentado con éxito!", activo: true}
+        )
+      },
+      error: () => {
+        this.acceso.setAviso(
+          {estado: false, texto: "Ocurrió un problema al rentar la película.", activo: true}
+        )
+      },
+      complete: () => {
+        this.sumaPelicula(post);
+      }
+    })
+  }
+
+  sumaPelicula( post: Pelicula ){
+    post.cantidad++;
+    this.acceso.sumaPelicula(post).subscribe();
   }
 
 }

@@ -15,7 +15,6 @@ import { ListadoComponent } from './componentes/listado/listado.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { EdicionComponent } from './componentes/dashboard/comps/edicion/edicion.component';
-import { LoginComponent } from './componentes/login/login.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -36,6 +35,9 @@ import { ListaEdicionComponent } from './componentes/dashboard/comps/lista-edici
 import { ListaEstrenosComponent } from './componentes/dashboard/comps/lista-estrenos/lista-estrenos.component';
 import { ListaMaspedidasComponent } from './componentes/dashboard/comps/lista-maspedidas/lista-maspedidas.component';
 import { NotificacionComponent } from './componentes/notificacion/notificacion.component';
+import { RegisterComponent } from './componentes/access/register/register.component';
+import { AccessComponent } from './componentes/access/access.component';
+import { LoginComponent } from './componentes/access/login/login.component';
 
 @NgModule({
   declarations: [
@@ -46,13 +48,15 @@ import { NotificacionComponent } from './componentes/notificacion/notificacion.c
     DetalleComponent,
     ContactoComponent,
     EdicionComponent,
-    LoginComponent,
     DashboardComponent,
     FooterComponent,
     ListaEdicionComponent,
     ListaEstrenosComponent,
     ListaMaspedidasComponent,
-    NotificacionComponent
+    NotificacionComponent,
+    RegisterComponent,
+    AccessComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
