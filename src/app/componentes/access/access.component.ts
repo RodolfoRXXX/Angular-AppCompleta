@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-access',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessComponent implements OnInit {
 
+  @Input() visible: string = 'login';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  esVisible(e: any){
+    this.visible = e;
   }
 
 }

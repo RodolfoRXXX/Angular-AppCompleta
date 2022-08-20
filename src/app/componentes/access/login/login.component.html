@@ -5,22 +5,35 @@
         Inicio de sesión
     </div>
     <div class="card-body">
-        <form>
+        <form [formGroup]="form">
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <label for="InputEmail" class="form-label">Correo electrónico</label>
+              <input type="email" 
+                     class="form-control" 
+                     id="InputEmail" 
+                     aria-describedby="emailHelp"
+                     formControlName="email"
+              />
               <div id="emailHelp" class="form-text">No compartiremos esta información con nadie.</div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <label for="InputPassword" class="form-label">Contraseña</label>
+              <input type="password" 
+                     class="form-control" 
+                     id="InputPassword"
+                     formControlName="password"      
+              />
             </div>
             <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
+              <input type="checkbox" 
+                     class="form-check-input" 
+                     id="Check"
+                     formControlName="recuerdame"       
+              />
+              <label class="form-check-label" for="Check">Recuérdame</label>
             </div>
-            <button type="submit" class="btn btn-primary form-control">Ingresar</button>
+            <button type="submit" class="btn btn-primary form-control" (ngSubmit)="onSubmit()">Ingresar</button>
         </form>
-        <a class="d-block mt-3 text-end" style="font-size: 0.8rem;" href="">No tenés una cuenta? Registrate!</a>
+        <a type="button" class="d-block mt-3 text-end" style="font-size: 0.8rem;" (click)="irRegistro()">No tenés una cuenta? Registrate!</a>
     </div>
 </div>
