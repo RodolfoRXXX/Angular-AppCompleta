@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { AccesoService } from 'src/app/servicios/acceso.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { emailValidator } from 'src/app/modulo/funciones/funciones';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
@@ -17,14 +17,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl(''),
-      pasword: new FormControl(''),
-      recuerdame: new FormControl('')
+      email: new FormControl('',
+        [
+          Validators.required,
+          emailValidator()
+        ]),
+      password: new FormControl('',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(20)
+        ]),
+      //recuerdame: new FormControl('')
     })
   }
 
   onSubmit(){
-    
+    console.log(this.form.value);
   }
 
   irRegistro(){

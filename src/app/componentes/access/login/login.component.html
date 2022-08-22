@@ -5,34 +5,49 @@
         Inicio de sesión
     </div>
     <div class="card-body">
-        <form [formGroup]="form">
-            <div class="mb-3">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-1">
               <label for="InputEmail" class="form-label">Correo electrónico</label>
               <input type="email" 
-                     class="form-control" 
+                     class="form-control"
                      id="InputEmail" 
                      aria-describedby="emailHelp"
                      formControlName="email"
+                     [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
               />
               <div id="emailHelp" class="form-text">No compartiremos esta información con nadie.</div>
+              <div style="height: 15px; font-size: 0.9rem;">
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
+                  <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
+                  <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
+                </div>
+              </div>
             </div>
             <div class="mb-3">
               <label for="InputPassword" class="form-label">Contraseña</label>
               <input type="password" 
-                     class="form-control" 
+                     class="form-control mb-1" 
                      id="InputPassword"
-                     formControlName="password"      
+                     formControlName="password"
+                     [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"   
               />
+              <div style="height: 15px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
+                  <span *ngIf="form.get('password')?.errors?.['required']">Este campo es requerido.</span>
+                  <span *ngIf="form.get('password')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="form.get('password')?.errors?.['maxlength']">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-check">
+            <!--<div class="mb-2 form-check">
               <input type="checkbox" 
                      class="form-check-input" 
                      id="Check"
                      formControlName="recuerdame"       
               />
               <label class="form-check-label" for="Check">Recuérdame</label>
-            </div>
-            <button type="submit" class="btn btn-primary form-control" (ngSubmit)="onSubmit()">Ingresar</button>
+            </div>-->
+            <button type="submit" class="btn btn-primary form-control" [disabled]="form.invalid">Ingresar</button>
         </form>
         <a type="button" class="d-block mt-3 text-end" style="font-size: 0.8rem;" (click)="irRegistro()">No tenés una cuenta? Registrate!</a>
     </div>

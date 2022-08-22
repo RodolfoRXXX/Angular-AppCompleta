@@ -5,25 +5,64 @@
         Registrarse
     </div>
     <div class="card-body">
-        <form>
-            <div class="mb-2">
-              <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">No compartiremos esta información con nadie.</div>
-            </div>
-            <div class="mb-2">
-              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="mb-2">
-                <label for="exampleInputPassword2" class="form-label">Repetí tu contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword2">
+        <form [formGroup]="form" (ngSubmit)="onRegister()">
+          <div class="mb-1">
+            <label for="InputEmail" class="form-label">Correo electrónico</label>
+            <input type="email" 
+                   class="form-control"
+                   id="InputEmail" 
+                   aria-describedby="emailHelp"
+                   formControlName="email"
+                   [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
+            />
+            <div id="emailHelp" class="form-text">No compartiremos esta información con nadie.</div>
+            <div style="height: 15px; font-size: 0.9rem;">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
+                <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
               </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
             </div>
-            <button type="submit" class="btn btn-primary form-control">Registrarse</button>
+          </div>
+          <div class="mb-1">
+            <label for="InputPassword" class="form-label">Contraseña</label>
+            <input type="password" 
+                   class="form-control mb-1" 
+                   id="InputPassword"
+                   formControlName="password"
+                   [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"   
+            />
+            <div style="height: 15px; font-size: 0.9rem; ">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
+                <span *ngIf="form.get('password')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="form.get('password')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
+                <span *ngIf="form.get('password')?.errors?.['maxlength']">La contraseña debe tener menos de 20 caracteres.</span>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="InputPasswordRep" class="form-label">Repetir contraseña</label>
+            <input type="password" 
+                   class="form-control mb-1" 
+                   id="InputPasswordRep"
+                   formControlName="passwordRep"
+                   [ngClass]="((form.get('passwordRep')?.valid)&&(form.get('passwordRep')?.value === form.get('password')?.value))?'is-valid':( ((form.get('passwordRep')?.invalid)||(form.get('passwordRep')?.value != form.get('password')?.value)) && (form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched)?'is-invalid':'')"   
+            />
+            <div style="height: 15px; font-size: 0.9rem; ">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="((form.get('passwordRep')?.invalid)&&(form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched))||(form.get('passwordRep')?.value != form.get('password')?.value)">
+                <span *ngIf="form.get('passwordRep')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="(form.get('passwordRep')?.value != form.get('password')?.value)&&(form.get('passwordRep')?.value != '')">La contraseña no es la misma.</span>
+              </div>
+            </div>
+          </div>
+          <!--<div class="mb-2 form-check">
+            <input type="checkbox" 
+                   class="form-check-input" 
+                   id="Check"
+                   formControlName="recuerdame"       
+            />
+            <label class="form-check-label" for="Check">Recuérdame</label>
+          </div>-->
+            <button type="submit" class="btn btn-primary form-control" [disabled]="form.invalid || !(form.get('passwordRep')?.value === form.get('password')?.value)" >Registrarse</button>
         </form>
         <a type="button" class="d-block mt-3 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Ya tenés una cuenta? Ingresá!</a>
     </div>
