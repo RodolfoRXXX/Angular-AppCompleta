@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pelicula } from 'src/app/entidades/pelicula';
 import { AccesoService } from 'src/app/servicios/acceso.service';
 import {MatIconModule} from '@angular/material/icon'
+import { CommComponentService } from 'src/app/servicios/comm-component.service';
 
 @Component({
   selector: 'app-lista-edicion',
@@ -14,10 +15,10 @@ export class ListaEdicionComponent implements OnInit {
   peliculas: Pelicula[];
   idEditSeleccionado: string;
 
-  constructor( private acceso: AccesoService ) { }
+  constructor( private acceso: AccesoService, private comm: CommComponentService ) { }
 
   ngOnInit(): void {
-    this.acceso.customId.subscribe( id => {
+    this.comm.customId.subscribe( id => {
       this.idEditSeleccionado = id;
       this.loading = true;
       this.getPeliculas(); 
@@ -37,7 +38,7 @@ export class ListaEdicionComponent implements OnInit {
     } else{
       this.idEditSeleccionado = id;
     }
-    this.acceso.setId(this.idEditSeleccionado);
+    this.comm.setId(this.idEditSeleccionado);
   }
 
   eliminar(id: string){

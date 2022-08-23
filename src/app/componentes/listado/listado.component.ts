@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pelicula } from 'src/app/entidades/pelicula';
 import { AccesoService } from 'src/app/servicios/acceso.service';
+import { CommComponentService } from 'src/app/servicios/comm-component.service';
 
 @Component({
   selector: 'app-listado',
@@ -12,7 +13,7 @@ export class ListadoComponent implements OnInit {
   peliculas: Pelicula[];
   loading: boolean;
 
-  constructor( private acceso: AccesoService ) { }
+  constructor( private acceso: AccesoService, private comm: CommComponentService ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -30,12 +31,12 @@ export class ListadoComponent implements OnInit {
     post.stock--;
     this.acceso.rentaPelicula(post).subscribe({
       next: () => {
-        this.acceso.setAviso(
+        this.comm.setAviso(
           {estado: true, texto: "La película se ha rentado con éxito!", activo: true}
         )
       },
       error: () => {
-        this.acceso.setAviso(
+        this.comm.setAviso(
           {estado: false, texto: "Ocurrió un problema al rentar la película.", activo: true}
         )
       },

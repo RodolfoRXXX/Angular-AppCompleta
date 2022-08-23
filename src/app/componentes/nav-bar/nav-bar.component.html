@@ -25,12 +25,24 @@
           <li class="nav-item ms-1">
             <a class="nav-link" aria-current="page" routerLink="/contacto" routerLinkActive="active">Contacto</a>
           </li>
-          <li class="nav-item ms-1">
-            <a class="nav-link" aria-current="page" routerLink="/tablero" routerLinkActive="active">Tablero</a>
-          </li>
-          <li class="nav-item ms-1">
-            <button class="btn btn-outline-light" type="button" routerLink="/access" routerLinkActive="active">Ingresar</button>
-          </li>
+            <li class="nav-item dropdown ms-1" dropdown routerLinkActive='active' *ngIf="isLoggedIn">
+              <a dropdownToggle class="nav-link dropdown-toggle" 
+                role="button" 
+                data-toggle="dropdown" 
+                aria-haspopup="true" 
+                aria-expanded="false"
+              >
+                Tablero
+              </a>
+              <ul *dropdownMenu class="dropdown-menu">
+                <li><a class="dropdown-item" routerLink="tablero-adm" routerLinkActive="active" *ngIf="user == 'admin'">Mi tablero</a></li>
+                <li><a class="dropdown-item" routerLink="tablero-bas" routerLinkActive="active" *ngIf="user == 'user'">Mi tablero</a></li>
+                <li><a class="dropdown-item" routerLink="logoff">Cerrar Sesión</a></li>
+              </ul>
+            </li>
+            <li class="nav-item ms-1" *ngIf="!isLoggedIn">
+              <button class="btn btn-outline-light" type="button" routerLink="/access" routerLinkActive="active">Ingresar</button>
+            </li>
         </ul>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pelicula } from 'src/app/entidades/pelicula';
 import { AccesoService } from 'src/app/servicios/acceso.service';
+import { CommComponentService } from 'src/app/servicios/comm-component.service';
 
 @Component({
   selector: 'app-edicion',
@@ -14,10 +15,10 @@ export class EdicionComponent implements OnInit {
   loading: boolean;
   formulario: FormGroup;
 
-  constructor( private acceso: AccesoService ) { }
+  constructor( private acceso: AccesoService, private comm: CommComponentService ) { }
 
   ngOnInit(): void {
-    this.acceso.customId.subscribe( idData => {
+    this.comm.customId.subscribe( idData => {
       if(idData != ''){
         this.acceso.getPelicula(idData).subscribe( (data:any) => {
           this.activarFormulario(data);
@@ -92,12 +93,12 @@ export class EdicionComponent implements OnInit {
       //modifica un registro
       this.acceso.editaPelicula(this.formulario.value).subscribe({
         next: () => {
-          this.acceso.setAviso(
+          this.comm.setAviso(
             {estado: true, texto: "El registro se ha modificado con éxito!", activo: true}
           )
         },
         error: () => {
-          this.acceso.setAviso(
+          this.comm.setAviso(
             {estado: false, texto: "Ocurrió un problema al modificar el registro.", activo: true}
           )
         },
@@ -109,12 +110,12 @@ export class EdicionComponent implements OnInit {
       //crea un registro
       this.acceso.creaPelicula(this.formulario.value).subscribe({
         next: () => {
-          this.acceso.setAviso(
+          this.comm.setAviso(
             {estado: true, texto: "El nuevo registro se creó con éxito!", activo: true}
           )
         },
         error: () => {
-          this.acceso.setAviso(
+          this.comm.setAviso(
             {estado: false, texto: "Ocurrió un problema al crear el registro.", activo: true}
           )
         },
@@ -127,7 +128,7 @@ export class EdicionComponent implements OnInit {
 
   cerrarFormulario(){
     this.activar = true;
-    this.acceso.setId('');
+    this.comm.setId('');
   }
 
 }

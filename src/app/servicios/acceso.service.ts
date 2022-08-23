@@ -1,10 +1,11 @@
+//Service de acceso a la DB
+
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
 import { Estreno } from '../entidades/estrenos';
-import { Aviso } from '../entidades/aviso';
 import { Pelicula } from '../entidades/pelicula';
 import { environment } from 'src/environments/environment';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,23 +33,7 @@ export class AccesoService {
     return throwError(() => new Error('Algo malo sucedió. por favor intenta más tarde.'));
   }
 
-  //Comunicación entre componentes sin relación
-    //Lista de edición genera evento y componente edición detecta cambio y id de la película a editar
-    private id = new BehaviorSubject<string>('');
-    public customId = this.id.asObservable();
-
-    public setId( idEdit: string ):void{
-      this.id.next(idEdit);
-    }
-
-    //Función que escucha los cambios de estado y llama a la notificación
-    private aviso = new BehaviorSubject<Aviso>({estado: false, texto: "", activo: false});
-    public customAviso = this.aviso.asObservable();
-
-    public setAviso( nuevaNot: Aviso ):void{
-      this.aviso.next(nuevaNot);
-    }
-
+  
   //Peticiones al servidor
   //GET
   getPeliculas(){

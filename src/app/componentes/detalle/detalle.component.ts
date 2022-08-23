@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Pelicula } from 'src/app/entidades/pelicula';
 import { AccesoService } from 'src/app/servicios/acceso.service';
+import { CommComponentService } from 'src/app/servicios/comm-component.service';
 
 @Component({
   selector: 'app-detalle',
@@ -14,7 +15,7 @@ export class DetalleComponent implements OnInit {
   id: string|null;
   loading: boolean;
 
-  constructor( private activatedRoute: ActivatedRoute, private acceso: AccesoService ) { };
+  constructor( private activatedRoute: ActivatedRoute, private acceso: AccesoService, private comm: CommComponentService ) { };
 
   ngOnInit(): void {
     this.loading = true;
@@ -38,12 +39,12 @@ export class DetalleComponent implements OnInit {
     post.stock--;
     this.acceso.rentaPelicula(post).subscribe({
       next: () => {
-        this.acceso.setAviso(
+        this.comm.setAviso(
           {estado: true, texto: "La película se ha rentado con éxito!", activo: true}
         )
       },
       error: () => {
-        this.acceso.setAviso(
+        this.comm.setAviso(
           {estado: false, texto: "Ocurrió un problema al rentar la película.", activo: true}
         )
       },

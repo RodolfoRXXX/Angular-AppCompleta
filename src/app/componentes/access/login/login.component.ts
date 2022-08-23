@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/entidades/user';
 import { emailValidator } from 'src/app/modulo/funciones/funciones';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { CommComponentService } from 'src/app/servicios/comm-component.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   @Output() visible = new EventEmitter<string>();
 
-  constructor( private auth: AuthService, private router: Router ) { }
+  constructor( private auth: AuthService, private router: Router, private comm: CommComponentService ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
       if( index > -1){
         this.estadoSmt = "ok";
         localStorage.setItem('currentUser', data[index].nivel);
-        (data[index].nivel == 'admin')?this.router.navigate(['tablero'], {queryParams: {id:data[index].id}}):this.router.navigate(['home'], {queryParams: {id:data[index].id}});
+        this.comm.setLogger(data[index].nivel);
+        (data[index].nivel == 'admin')?this.router.navigate(['tablero-adm'], {queryParams: {id:data[index].id}}):this.router.navigate(['tablero-bas'], {queryParams: {id:data[index].id}});
         console.log(data[index].nivel)
       } else{
         this.estadoSmt = "error";

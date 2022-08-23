@@ -7,6 +7,8 @@ import { HomeComponent } from './componentes/home/home.component';
 import { ListadoComponent } from './componentes/listado/listado.component';
 import { AccessComponent } from './componentes/access/access.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { LogoffComponent } from './componentes/access/logoff/logoff.component';
+import { DashboardBasicoComponent } from './componentes/dashboard-basico/dashboard-basico.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -14,7 +16,9 @@ const routes: Routes = [
   {path: 'listado', component: ListadoComponent},
   {path: 'detalle/:id', component: DetalleComponent},
   {path: 'contacto', component: ContactoComponent},
-  {path: 'tablero', component: DashboardComponent, canActivate:[AuthGuard] },
+  {path: 'tablero-adm', component: DashboardComponent, canActivate:[AuthGuard] },
+  {path: 'tablero-bas', component: DashboardBasicoComponent, canActivate:[AuthGuard] },
+  {path: 'logoff', component: LogoffComponent},
   {path: 'access', component: AccessComponent}
 ];
 

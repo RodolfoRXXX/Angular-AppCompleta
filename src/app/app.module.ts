@@ -38,6 +38,8 @@ import { NotificacionComponent } from './componentes/notificacion/notificacion.c
 import { RegisterComponent } from './componentes/access/register/register.component';
 import { AccessComponent } from './componentes/access/access.component';
 import { LoginComponent } from './componentes/access/login/login.component';
+import { LogoffComponent } from './componentes/access/logoff/logoff.component';
+import { DashboardBasicoComponent } from './componentes/dashboard-basico/dashboard-basico.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { LoginComponent } from './componentes/access/login/login.component';
     NotificacionComponent,
     RegisterComponent,
     AccessComponent,
-    LoginComponent
+    LoginComponent,
+    LogoffComponent,
+    DashboardBasicoComponent
   ],
   imports: [
     BrowserModule,
