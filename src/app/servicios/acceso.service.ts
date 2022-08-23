@@ -4,15 +4,12 @@ import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
 import { Estreno } from '../entidades/estrenos';
 import { Aviso } from '../entidades/aviso';
 import { Pelicula } from '../entidades/pelicula';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccesoService {
-
-  url: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/peliculas";
-  //url: string = "http://localhost:3000/api/peliculas"
-  urlEstrenos: string = "https://62e9b0c001787ec7121b68cf.mockapi.io/estrenos";
 
   constructor(private http: HttpClient ) { }
 
@@ -55,28 +52,28 @@ export class AccesoService {
   //Peticiones al servidor
   //GET
   getPeliculas(){
-    return this.http.get<Pelicula[]>( this.url )
+    return this.http.get<Pelicula[]>( environment.urlGeneral )
                .pipe(
                 catchError(this.handleError)
                );
   }
 
   getPelicula( id: string ){
-    return this.http.get<Pelicula>( this.url + '/' + id )
+    return this.http.get<Pelicula>( environment.urlGeneral + '/' + id )
                .pipe(
                 catchError(this.handleError)
                );
   }
 
   getPedidas(){
-    return this.http.get<Pelicula[]>( this.url )
+    return this.http.get<Pelicula[]>( environment.urlGeneral )
                .pipe(
                 catchError(this.handleError)
                );
   }
 
   getEstrenos(){
-    return this.http.get<Estreno[]>( this.urlEstrenos )
+    return this.http.get<Estreno[]>( environment.urlEstrenos )
                .pipe(
                 catchError(this.handleError)
                );
@@ -84,7 +81,7 @@ export class AccesoService {
 
   //POST
   creaPelicula( post: Pelicula ){
-    return this.http.post<Pelicula>(this.url, post, this.httpOptions)
+    return this.http.post<Pelicula>(environment.urlGeneral, post, this.httpOptions)
                .pipe(
                 catchError(this.handleError)
                );
@@ -93,21 +90,21 @@ export class AccesoService {
 
   //PUT
   rentaPelicula( post: Pelicula ){
-    return this.http.put<Pelicula>( this.url + '/' + post.id, post, this.httpOptions )
+    return this.http.put<Pelicula>( environment.urlGeneral + '/' + post.id, post, this.httpOptions )
                .pipe(
                 catchError(this.handleError)
                );
   }
 
   editaPelicula( post: Pelicula ){
-    return this.http.put<Pelicula>( this.url + '/' + post.id, post, this.httpOptions )
+    return this.http.put<Pelicula>( environment.urlGeneral + '/' + post.id, post, this.httpOptions )
                .pipe(
                 catchError(this.handleError)
                );
   }
 
   sumaPelicula( post: Pelicula ){
-    return this.http.put<Pelicula>( this.url + '/' + post.id, post, this.httpOptions )
+    return this.http.put<Pelicula>( environment.urlGeneral + '/' + post.id, post, this.httpOptions )
                .pipe(
                   catchError(this.handleError)
                );
@@ -115,7 +112,7 @@ export class AccesoService {
 
   //DELETE
   eliminarPelicula( id: string ){
-    return this.http.delete( this.url + '/' + id, this.httpOptions )
+    return this.http.delete( environment.urlGeneral + '/' + id, this.httpOptions )
                .pipe(
                 catchError(this.handleError)
                );

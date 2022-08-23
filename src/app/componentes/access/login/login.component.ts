@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/entidades/user';
 import { emailValidator } from 'src/app/modulo/funciones/funciones';
 import { AuthService } from 'src/app/servicios/auth.service';
 
@@ -10,10 +12,11 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  estadoSmt: string = "ingreso";
   form: FormGroup;
   @Output() visible = new EventEmitter<string>();
 
-  constructor( private auth: AuthService ) { }
+  constructor( private auth: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,7 +36,22 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form.value);
+    this.estadoSmt = "load";
+    this.auth.getAuth(this.form.value).subscribe( (data: User[]) => {
+      var index = data.findIndex( element => (element.email === this.form.value.email && element.password === this.form.value.password));
+      if( index > -1){
+        this.estadoSmt = "ok";
+        localStorage.setItem('currentUser', data[index].nivel);
+        (data[index].nivel == 'admin')?this.router.navigate(['tablero'], {queryParams: {id:data[index].id}}):this.router.navigate(['home'], {queryParams: {id:data[index].id}});
+        console.log(data[index].nivel)
+      } else{
+        this.estadoSmt = "error";
+      }
+    } )
+  }
+
+  actualizarSmt(){
+    (this.estadoSmt == 'error')?(this.estadoSmt = 'ingreso'):'';
   }
 
   irRegistro(){
